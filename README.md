@@ -1,81 +1,91 @@
-✈️ Eco-Pilot: Sky Restoration – Project Manual
-Group 5 Final Project A Sustainable Aviation Strategy & Simulation Game
+# 🌍 Eco-Pilot: Sky Restoration
+### **Final Project | Group 5**
 
-📖 1. Project Introduction
-Eco-Pilot: Sky Restoration is an interactive simulation designed to educate players on the environmental impact of aviation. In a world facing climatic collapse, players take on the role of a pilot who must navigate the globe to collect components for an atmospheric restoration machine.
+Eco-Pilot: Sky Restoration is a strategic aviation simulation designed to challenge players' decision-making regarding environmental sustainability. Players must navigate a global network of airports to collect components for an atmospheric restoration machine while managing a finite carbon budget.
 
-The Goal
-Players must visit 10 unique airports and successfully collect 5 essential parts to save the planet. All of this must be achieved before the 10,000 CO2 unit budget is depleted.
+---
 
-👥 2. Project Team (Group 5)
-Santosh Khanal: Lead Developer (Database logic, Haversine formulas, Backend integration).
+## 👥 Meet the Team (Group 5)
+* **Santosh Khanal**: Lead Developer (Database Logic, Python Backend, Haversine Calculations)
+* **Dipesh Yogi**: Project Coordinator (Documentation, Quality Assurance, Scheduling)
+* **Mohammad Moynul**: Infrastructure Lead (System Architecture, UI Design, Deployment)
 
-Dipesh Yogi: Project Coordinator (Team communication, Documentation, Quality Assurance).
+---
 
-Mohammad Moynul: Infrastructure Lead (System architecture, Deployment, Report structure).
+## 📖 Project Background & Narrative
+The world is at a climatic tipping point. To reverse the damage, a "Carbon-Builder" machine must be assembled. As an Eco-Pilot, you are the last hope to transport 5 critical components across the globe. However, every flight releases CO2, potentially worsening the very crisis you are trying to solve.
 
-🎮 3. Game Mechanics & Manual
-The Resources
-Carbon Budget: You start with 10,000 units. Every kilometer flown deducts a specific amount of CO2.
+### **The Challenge**
+* **The Mission**: Visit **10 airports** and collect **5 machine parts**.
+* **The Resource**: You start with **10,000 CO2 units**.
+* **The Parts**: Electric Motor, Battery Pack, Air Filter, Propeller, and Solar Panel.
 
-The Machine Parts: You must find the Electric Motor, Battery Pack, Air Filter, Propeller, and Solar Panel.
+---
 
-The Probability Logic
-Discovery Chance: There is a 40% random drop chance for a part at every new airport you land at.
+## 🎮 Game Mechanics (User Manual)
 
-Strategic Risk: Because the drop rate is randomized, players must decide between taking long, expensive flights to new regions or staying within a localized area to save fuel.
+### **1. Navigation**
+Players are presented with 3 destination options at each turn. Distances are calculated using real-world Latitude/Longitude coordinates from our database.
 
-Win/Loss Conditions
-Victory: Collect all 5 parts and visit 10 airports while CO2 > 0.
+### **2. The Probability System**
+To win, you must find 5 parts. However, parts are not guaranteed.
+* **40% Discovery Chance**: Every time you land at a new airport, there is a 40% probability that a part will be found.
+* **Strategic Failure**: If the "random drop chance" does not work in your favor within the 10-airport limit, or if you exceed 10,000 CO2 units, the mission fails.
 
-Failure: Running out of CO2 before the machine is complete.
+### **3. HUD (Heads-Up Display)**
+The interface updates in real-time to show:
+* Current Location
+* Remaining CO2 Budget
+* Inventory (Collected Parts)
+* Total Airports Visited
 
-🛠️ 4. Technical Architecture
-The application is built using a modern full-stack web architecture to ensure high performance and a smooth user interface.
+---
 
-Database (MySQL): Stores a dataset of 10,000+ real-world airports. It handles spatial queries to calculate distances between coordinates.
+## 🛠️ Technical Stack & Architecture
 
-Backend (Python Flask): Processes the game logic, manages the session state, and performs the probability calculations.
+### **Backend: Python & Flask**
+The core engine is built with **Flask**. It handles the game state, processes the 40% RNG logic, and performs the **Haversine Formula** to calculate distances between global coordinates.
 
-Frontend (HTML/CSS/JS):
+### **Database: MySQL**
+We utilize a relational database containing over **10,000 airports**. 
+* **Spatial Data**: Used to fetch nearby airports and track player location.
+* **Persistence**: Stores player inventory and carbon history.
 
-Leaflet.js: Renders the interactive global map.
+### **Frontend: JavaScript & Fetch API**
+To ensure a smooth, professional UX, we used the **Fetch API**. This allows the game to update the HUD and markers on the **Leaflet.js** map asynchronously—meaning the page never has to refresh during gameplay.
 
-Fetch API: Enables asynchronous updates. The game HUD (Heads-Up Display) updates fuel and inventory without reloading the page.
+---
 
-🚀 5. Installation & Setup
-Follow these steps to run the project locally:
+## 🚀 Installation & Setup
 
-Clone the Repository
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/khanalsantosh260-Igtm/eco-pilot-game](https://github.com/khanalsantosh260-Igtm/eco-pilot-game)
+    ```
 
-Bash
-git clone https://github.com/khanalsantosh260-Igtm/eco-pilot-game
-Environment Setup
-Ensure you have Python 3.10+ and MySQL installed.
+2.  **Install Dependencies**
+    ```bash
+    pip install flask mysql-connector-python
+    ```
 
-Install Dependencies
+3.  **Database Setup**
+    * Import the provided `airports.sql` file into your MySQL instance.
+    * Update the database connection details in `app.py`.
 
-Bash
-pip install flask mysql-connector-python
-Database Configuration
-Import the provided .sql file into your MySQL workbench. Update the database credentials in the app.py or config.py file.
+4.  **Launch the Application**
+    ```bash
+    python app.py
+    ```
+    Open `http://127.0.0.1:5000` in your web browser.
 
-Launch the Game
+---
 
-Bash
-python app.py
-Open http://127.0.0.1:5000 in your web browser.
+## 🔮 Future Roadmap
+* **Dynamic Weather**: Integrating a Weather API to adjust CO2 costs based on real-time wind speeds.
+* **Vessel Upgrades**: Allowing players to upgrade their plane for better fuel efficiency.
+* **Global Leaderboard**: Ranking pilots based on the amount of CO2 saved during successful missions.
 
-📈 6. Future Development Roadmap
-To further enhance the simulation, the following features are planned:
+---
 
-Live Weather API: Real-time wind speed affecting CO2 consumption.
-
-Upgrade Shop: Use "Eco-Credits" to upgrade the plane's engine for better efficiency.
-
-Multiplayer Leaderboards: Compare your carbon-efficiency score with other pilots worldwide.
-
-Reforestation Zones: Special airports where players can perform tasks to "earn back" CO2 units.
-
-📜 7. License
-This project was developed for academic purposes. All code and assets are the property of Group 5.
+## 📜 License
+This project was developed for academic purposes. All rights reserved by Group 5.
